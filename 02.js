@@ -127,7 +127,7 @@ function Queue(initial) {
     
     if (typeof initial === "object" && initial instanceof Array) {
         for (i = 0, len = initial.length; i < len; i++) {
-            this._store[i] = initial[i];
+            this._store.push(initial[i]);
         }
     }
     
@@ -137,5 +137,46 @@ function Queue(initial) {
     
     this.shift = function() {
         return this._store.length < 1 ? null : this._store.shift();
+    };
+}
+
+function Queue2(initial) {
+    var i, len;
+    
+    this.end = -1;
+    
+    if (typeof initial === "object" && initial instanceof Array) {
+        for (i = 0, len = initial.length; i < len; i++) {
+            this.push(initial[i]);
+        }
+    }
+    
+    this.push = function(elem) {
+        this.end += 1;
+        this[this.end] = elem;
+    };
+    
+    this.shift = function() {
+        if (this.end < 0) return;
+        
+        var shifted = this[0];
+        this._shiftLeft(1);
+        return shifted;
+    };
+    
+    this._shiftLeft = function(n) {
+        var j;
+        
+        if (this.end < 0) return;
+        
+        for (j = 0; j <= this.end; j++) {
+            if (j < this.end - n) {
+                this[i] = this[i + n];
+            } else {
+                delete this[i];
+            }
+        }
+        
+        this.end -= n;
     };
 }
