@@ -3,7 +3,7 @@
 // 
 // Create an object with a method `hello` that returns the string "Hello, world".
 
-var ex1 = {
+helloObject = {
     hello: function() {
         return "Hello, world";
     }
@@ -74,17 +74,16 @@ function extendObject(subject, extension) {
 // stack should return `null`. The stack should be initially empty.
 
 function Stack() {
-    
     this._store = [];
-    
-    this.push = function(elem) {
-        this._store.push(elem);
-    };
-    
-    this.pop = function() {
-        return this._store.length < 1 ? null : this._store.pop();
-    };
 }
+
+Stack.prototype.push = function(elem) {
+    this._store.push(elem);
+};
+
+Stack.prototype.pop = function() {
+    return this._store.length < 1 ? null : this._store.pop();
+};
 
 // Exercise 6
 // ----------
@@ -102,15 +101,15 @@ function Stack2(initial) {
             this._store[i] = initial[i];
         }
     }
-    
-    this.push = function(elem) {
-        this._store.push(elem);
-    };
-    
-    this.pop = function() {
-        return this._store.length < 1 ? null : this._store.pop();
-    };
 }
+
+Stack2.prototype.push = function(elem) {
+    this._store.push(elem);
+};
+
+Stack2.prototype.pop = function() {
+    return this._store.length < 1 ? null : this._store.pop();
+};
 
 // Exercise 7
 // ----------
@@ -130,15 +129,19 @@ function Queue(initial) {
             this._store.push(initial[i]);
         }
     }
-    
-    this.push = function(elem) {
-        this._store.push(elem);
-    };
-    
-    this.shift = function() {
-        return this._store.length < 1 ? null : this._store.shift();
-    };
 }
+
+Queue.prototype.push = function(elem) {
+    this._store.push(elem);
+};
+
+Queue.prototype.shift = function() {
+    return this._store.length < 1 ? null : this._store.shift();
+};
+
+// Alternative implementation of a queue that doesn't use an array as an
+// internal store, but instead adds elements of the queue directly as
+// properties with numeric indices.
 
 function Queue2(initial) {
     var i, len;
@@ -150,33 +153,33 @@ function Queue2(initial) {
             this.push(initial[i]);
         }
     }
-    
-    this.push = function(elem) {
-        this.end += 1;
-        this[this.end] = elem;
-    };
-    
-    this.shift = function() {
-        if (this.end < 0) return;
-        
-        var shifted = this[0];
-        this._shiftLeft(1);
-        return shifted;
-    };
-    
-    this._shiftLeft = function(n) {
-        var j;
-        
-        if (this.end < 0) return;
-        
-        for (j = 0; j <= this.end; j++) {
-            if (j < this.end - n) {
-                this[i] = this[i + n];
-            } else {
-                delete this[i];
-            }
-        }
-        
-        this.end -= n;
-    };
 }
+
+Queue2.prototype.push = function(elem) {
+    this.end += 1;
+    this[this.end] = elem;
+};
+
+Queue2.prototype.shift = function() {
+    if (this.end < 0) return;
+    
+    var shifted = this[0];
+    this._shiftLeft(1);
+    return shifted;
+};
+
+Queue2.prototype._shiftLeft = function(n) {
+    var j;
+    
+    if (this.end < 0) return;
+    
+    for (j = 0; j <= this.end; j++) {
+        if (j < this.end - n) {
+            this[i] = this[i + n];
+        } else {
+            delete this[i];
+        }
+    }
+    
+    this.end -= n;
+};
