@@ -12,8 +12,8 @@ helloObject = {
 // Exercise 2
 // ----------
 // 
-// Write a function `detectType` which accepts one argument and prints the type of
-// that argument if it is a primitive or, if it is an object, which of
+// Write a function `detectType` which accepts one argument and returns the type
+// of that argument if it is a primitive or, if it is an object, which of
 // JavaScript's built-in objects it is an instance of.
 
 function detectType(value) {
