@@ -18,19 +18,17 @@ helloObject = {
 
 function detectType(value) {
     var builtIns = [Date, Function, RegExp, Number, String, Boolean, Object],
-        type, i, len;
+        i, len;
     
     if (typeof value === "object" || typeof value === "function") {
         for (i = 0, len = builtIns.length; i < len; i++) {
-            if (!type && value instanceof builtIns[i]) {
-                type = builtIns[i];
+            if (value instanceof builtIns[i]) {
+                return builtIns[i];
             }
         }
-    } else {
-        type = typeof value;
     }
     
-    return type;
+    return typeof value;
 }
 
 // Exercise 3
