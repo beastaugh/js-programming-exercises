@@ -30,7 +30,7 @@ function detectType(value) {
         type = typeof value;
     }
     
-    return type || null;
+    return type;
 }
 
 // Exercise 3
