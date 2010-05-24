@@ -161,7 +161,7 @@ Queue2.prototype.push = function(elem) {
 };
 
 Queue2.prototype.shift = function() {
-    if (this.end < 0) return;
+    if (this.end < 0) return null;
     
     var shifted = this[0];
     this._shiftLeft(1);
@@ -169,12 +169,12 @@ Queue2.prototype.shift = function() {
 };
 
 Queue2.prototype._shiftLeft = function(n) {
-    var j;
+    var i;
     
     if (this.end < 0) return;
     
-    for (j = 0; j <= this.end; j++) {
-        if (j < this.end - n) {
+    for (i = 0; i <= this.end; i++) {
+        if (i <= this.end - n) {
             this[i] = this[i + n];
         } else {
             delete this[i];
