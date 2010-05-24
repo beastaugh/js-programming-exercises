@@ -52,10 +52,10 @@ function buildObject(constructor) {
 // returns the extended object.
 
 function extendObject(subject, extension) {
-    var prop;
+    var prop, val;
     
     for (prop in extension) {
-        if (!subject[prop]) {
+        if (typeof subject[prop] === "undefined") {
             subject[prop] = extension[prop];
         }
     }
