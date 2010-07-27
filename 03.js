@@ -189,7 +189,7 @@ Function.prototype.bind = function(object) {
     var fn = this;
     
     return function() {
-        var args = Array.prototype.slice(arguments, 0);
+        var args = Array.prototype.slice.apply(arguments, 0);
         
         return fn.apply(object, args);
     };
